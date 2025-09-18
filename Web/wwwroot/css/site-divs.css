@@ -1,0 +1,47 @@
+:root {
+    --primary-color: #FEBF25;
+    --secondary-color: #FECC52;
+    --tertiary-color: #FEDE90;
+    --complementary-color: #2564FE;
+    --primary-background-color: #FFFFF5;
+    --secondary-background-color: #FFFFFF;
+}
+
+/*Divs*/
+.section-padding {
+    background-color: var(--primary-background-color);
+    padding: 6rem 0;
+}
+
+.section-padding:nth-of-type(even) {
+    background-color: var(--secondary-background-color);
+    padding: 6rem 0;
+}
+
+/* Estilos para os cartões de produto */
+.card-custom {
+    border: none;
+    border-radius: 1rem;
+    /* Sombra inicial mais suave, parecendo um brilho */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.10);
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.card-custom:hover {
+    /* Sombra mais pronunciada no hover, criando um efeito de elevação */
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.10), 0 0 0 1px var(--tertiary-color); /* Sombra colorida seguindo a borda */
+}
+
+/* Ajustes de tipografia e elementos de destaque */
+h1.display-1 {
+    font-size: 4rem; /* Tamanho maior para o título principal */
+}
+
+/* Estilos para as imagens de placeholder */
+.card-img-top {
+    width: 80%; /* Reduz a imagem para 80% da largura do contêiner */
+    margin: 1.5rem auto; /* Adiciona margem vertical e centraliza horizontalmente */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.10);
+    border-radius: 1rem !important; /* Arredonda todas as pontas e sobrescreve o estilo padrão */
+}

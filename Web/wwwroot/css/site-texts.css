@@ -1,0 +1,21 @@
+:root {
+    --primary-color: #FEBF25;
+    --secondary-color: #FECC52;
+    --tertiary-color: #FEDE90;
+    --complementary-color: #2564FE;
+    --primary-background-color: #FFFFF5;
+    --secondary-background-color: #FFFFFF;
+}
+
+
+h1.display-1 {
+    font-size: 4rem; 
+}
+
+.fs-1 {
+    font-size: 2.5rem !important;
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}

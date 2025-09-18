@@ -1,8 +1,98 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    //Layout = "_LayoutUnauthorized";
+    ViewData["Title"] = "Bem vindo";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="section-padding text-center">
+    <div class="container">
+        <h1 class="display-1 fw-bold mb-3">Seu jantar, <br>sem esforço.</h1>
+        <p class="lead text-muted mb-5">Massas congeladas que combinam a tradição italiana com a sua praticidade.</p>
+        <a href="#produtos" class="btn btn-primary btn-lg rounded-pill px-5">Acessar cardápio</a>
+    </div>
+</section>
+
+<section id="vantagens" class="section-padding">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Praticidade e Qualidade</h2>
+            <p class="text-muted">A solução perfeita para quem ama massas, mas não tem tempo a perder.</p>
+        </div>
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <div class="fs-1 text-primary mb-3">
+                    <i class="fas fa-box-open"></i>
+                </div>
+                <h5 class="fw-bold">Feito para Congelar</h5>
+                <p class="text-muted">Receitas especiais que mantêm a textura e o sabor depois de congeladas.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="fs-1 text-primary mb-3">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <h5 class="fw-bold">Entrega no Conforto da sua Casa</h5>
+                <p class="text-muted">Seu pedido chega rápido e embalado com todo o cuidado.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="fs-1 text-primary mb-3">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <h5 class="fw-bold">Pronto em Minutos</h5>
+                <p class="text-muted">Basta aquecer e servir. Simples assim!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="produtos" class="section-padding">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Nossas Delícias</h2>
+            <p class="text-muted">Uma variedade de massas para todos os gostos.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card card-custom h-100">
+                    <img src="https://www.w3schools.com/images/picture.jpg" class="card-img-top" alt="Lasanha de Carne">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold">Lasanha Clássica</h5>
+                        <p class="text-muted">Feita com o tradicional molho à bolonhesa.</p>
+                        <span class="fs-4 fw-bold d-block my-3">R$ 35,00</span>
+                        <a href="#" class="btn btn-primary w-100 rounded-pill">Adicionar ao Carrinho</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-custom h-100">
+                    <img src="https://www.w3schools.com/images/picture.jpg" class="card-img-top" alt="Ravioli de Queijo">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold">Ravioli de 4 Queijos</h5>
+                        <p class="card-text text-muted">Aquele recheio cremoso que derrete na boca.</p>
+                        <span class="fs-4 fw-bold d-block my-3">R$ 28,00</span>
+                        <a href="#" class="btn btn-primary w-100 rounded-pill">Adicionar ao Carrinho</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-custom h-100">
+                    <img src="https://www.w3schools.com/images/picture.jpg" class="card-img-top" alt="Nhoque de Batata Doce">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold">Nhoque de Batata Doce</h5>
+                        <p class="card-text text-muted">Leve e delicioso, uma opção para o dia a dia.</p>
+                        <span class="fs-4 fw-bold d-block my-3">R$ 30,00</span>
+                        <a href="#" class="btn btn-primary w-100 rounded-pill">Adicionar ao Carrinho</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-padding text-center">
+    <div class="container">
+        <h2 class="fw-bold">Transforme seu jantar.</h2>
+        <p class="lead">Experimente o sabor e a praticidade que você merece.</p>
+        <a href="#" class="btn btn-primary btn-lg rounded-pill px-5 mt-4">Comprar Agora</a>
+    </div>
+</section>
