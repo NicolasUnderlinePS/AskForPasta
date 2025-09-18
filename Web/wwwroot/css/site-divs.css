@@ -5,6 +5,7 @@
     --complementary-color: #2564FE;
     --primary-background-color: #FFFFF5;
     --secondary-background-color: #FFFFFF;
+    --white-color: #F8F8FF;
 }
 
 /*Divs*/
@@ -43,5 +44,5 @@ h1.display-1 {
     width: 80%; /* Reduz a imagem para 80% da largura do contêiner */
     margin: 1.5rem auto; /* Adiciona margem vertical e centraliza horizontalmente */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.10);
-    border-radius: 1rem !important; /* Arredonda todas as pontas e sobrescreve o estilo padrão */
+    border-radius: 1rem !important; 
 }

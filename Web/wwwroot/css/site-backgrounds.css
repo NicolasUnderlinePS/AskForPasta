@@ -5,14 +5,14 @@
     --complementary-color: #2564FE;
     --primary-background-color: #FFFFF5;
     --secondary-background-color: #FFFFFF;
+    --white-color: #F8F8FF;
 }
-
 .bg-primary {
     background-color: var(--primary-background-color) !important;
-    color: #fff !important;
+    color: var(--white-color) !important;
 }
 
 .bg-secondary {
     background-color: var(--secondary-background-color) !important;
-    color: #fff !important;
+    color: var(--white-color) !important;
 }

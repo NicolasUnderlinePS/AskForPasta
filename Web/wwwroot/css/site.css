@@ -5,6 +5,7 @@
     --complementary-color: #2564FE;
     --primary-background-color: #FFFFF5;
     --secondary-background-color: #FFFFFF;
+    --white-color: #F8F8FF;
 }
 
 html {
@@ -25,10 +26,22 @@ html {
 body {
     font-family: 'Poppins', sans-serif;
     color: var(--dark-gray);
-    background-color: var(--secondary-background-color);
+    background-color: var(--primary-background-color);
 }
 
 .navbar-brand {
     font-weight: bold;
     font-size: 1.5rem;
+}
+
+.progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: var(--white-color);
+    text-align: center;
+    white-space: nowrap;
+    background-color: var(--primary-color);
+    transition: width .6s ease;
 }
