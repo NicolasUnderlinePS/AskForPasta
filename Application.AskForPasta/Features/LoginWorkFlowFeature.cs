@@ -10,10 +10,12 @@ namespace Application.AskForPasta.Features
     public class LoginWorkFlowFeature : ILoginWorkFlowFeature
     {
         private readonly ILoginWorkFlowRepository loginWorkFlowRepository;
+        private readonly IUserRepository userRepository;
 
-        public LoginWorkFlowFeature(ILoginWorkFlowRepository loginWorkFlowRepository)
+        public LoginWorkFlowFeature(ILoginWorkFlowRepository loginWorkFlowRepository, IUserRepository userRepository)
         {
             this.loginWorkFlowRepository = loginWorkFlowRepository;
+            this.userRepository = userRepository;
         }
 
         public async Task<GenericResponse<bool>> CreateUserAccessAsync(CreateUserAccessRequestDto request)
@@ -32,6 +34,18 @@ namespace Application.AskForPasta.Features
                 }
 
                 return await loginWorkFlowRepository.CreateUserAccessAsync(request);
+            }
+            catch (Exception ex)
+            {
+                return GenericResponse<bool>.Fail("Ocorreu um erro inesperado ao criar o usuário.", new List<string> { ex.Message });
+            }
+        }
+
+        public async Task<GenericResponse<bool>> StartSessionAsync(StartSessionRequestDto request)
+        {
+            try
+            {
+                return await userRepository.SelectUserToLoginAsync(request.Email, request.Password);
             }
             catch (Exception ex)
             {

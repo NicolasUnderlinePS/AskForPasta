@@ -168,6 +168,7 @@ namespace Infrastructure.AskForPasta.Contexts
                 entity.Property(e => e.Document).IsRequired().HasMaxLength(14);
                 entity.Property(e => e.Email).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.CellPhone).IsRequired().HasMaxLength(13);
+                entity.Property(e => e.IsActive).IsRequired();
                 entity.Property(e => e.EncryptPassword).IsRequired().HasMaxLength(64);
                 entity.Property(e => e.UserTypeId).IsRequired();
                 entity.Property(e => e.CreateAt).IsRequired();

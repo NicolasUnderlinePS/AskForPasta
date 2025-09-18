@@ -40,5 +40,22 @@ namespace Infrastructure.AskForPasta.Repositories
                 return GenericResponse<int>.Fail("Ocorreu um erro inesperado, tente novamente mais tarde.", new List<string>() { ex.Message });
             }
         }
+
+        public async Task<GenericResponse<bool>> SelectUserToLoginAsync(string email, string password)
+        {
+            try
+            {
+                User? user = await _context.User.Where(u => u.Email == email && u.EncryptPassword == password && u.IsActive).FirstOrDefaultAsync();
+
+                if (user == null)
+                    return GenericResponse<bool>.Fail("Usuário ou senha inválidos, ou usuário inativo.");
+
+                return GenericResponse<bool>.Ok(true, "Login realizado com sucesso.");
+            }
+            catch (Exception ex)
+            {
+                return GenericResponse<bool>.Fail("Ocorreu um erro inesperado ao realizar o login.", new List<string> { ex.Message });
+            }
+        }
     }
 }

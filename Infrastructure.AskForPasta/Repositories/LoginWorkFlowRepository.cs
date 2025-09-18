@@ -9,11 +9,11 @@ namespace Infrastructure.AskForPasta.Repositories
     public class LoginWorkFlowRepository : ILoginWorkFlowRepository
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserRepository userRepository;
-        private readonly ClientRepository clientRepository;
-        private readonly AddressRepository addressRepository;
+        private readonly IUserRepository userRepository;
+        private readonly IClientRepository clientRepository;
+        private readonly IAddressRepository addressRepository;
 
-        public LoginWorkFlowRepository(ApplicationDbContext context, UserRepository userRepository, ClientRepository clientRepository, AddressRepository addressRepository)
+        public LoginWorkFlowRepository(ApplicationDbContext context, IUserRepository userRepository, IClientRepository clientRepository, IAddressRepository addressRepository)
         {
             _context = context;
             this.userRepository = userRepository;
@@ -34,7 +34,7 @@ namespace Infrastructure.AskForPasta.Repositories
                     return GenericResponse<bool>.Fail(response.Message, response.Errors);
 
                 request.AddressId = response.Data;
-                response = await userRepository.CreateUserAsync(new User(request.NickName, request.Document, request.Email, request.CellPhone, request.Password, request.UserTypeId, request.RequestTime));
+                response = await userRepository.CreateUserAsync(new User(request.NickName, request.Document, request.Email, request.CellPhone, false, request.Password, request.UserTypeId, request.RequestTime));
 
                 if (response.Success == false)
                     return GenericResponse<bool>.Fail(response.Message, response.Errors);
