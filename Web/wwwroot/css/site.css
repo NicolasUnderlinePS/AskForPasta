@@ -44,4 +44,5 @@ body {
     white-space: nowrap;
     background-color: var(--primary-color);
     transition: width .6s ease;
+    border-radius: 50rem;
 }

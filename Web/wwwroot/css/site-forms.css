@@ -1,0 +1,65 @@
+:root {
+    --primary-color: #FEBF25;
+    --secondary-color: #FECC52;
+    --tertiary-color: #FEDE90;
+    --complementary-color: #2564FE;
+    --primary-background-color: #FFFFF5;
+    --secondary-background-color: #FFFFFF;
+    --white-color: #F8F8FF;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.form-card-custom {
+    background-color: var(--secondary-background-color);
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.10);
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    padding: 2.5rem;
+}
+
+.form-div-input {
+    position: relative;
+    margin: 2rem 0rem 2rem 0rem;
+    width: 100%;
+}
+
+.form-div-input label.text {
+    font-size: 0.75rem;
+    color: var(--dark-gray); /* Usando a cor de texto padrão */
+    font-weight: 700;
+    position: absolute; /* Posição absoluta para o efeito de flutuar */
+    top: 0;
+    left: 0.5rem;
+    margin: 0 0 0 15px;
+    padding: 0 3px;
+    background: var(--secondary-background-color); /* Fundo que combina com o body */
+    width: fit-content;
+    z-index: 1; /* Garante que o rótulo fique por cima do input */
+    transform: translateY(-50%); /* Ajusta a posição verticalmente */
+}
+
+.form-div-input input.form-input,
+.form-div-input select.form-input {
+    padding: 1rem 1rem;
+    font-size: 1rem;
+    border: 2px var(--primary-color) solid; /* Borda com a cor complementar */
+    border-radius: 1.5rem; /* Mais arredondado */
+    background: transparent;
+    width: 100%;
+    z-index: 0;
+}
+
+.form-div-input input.form-input:focus,
+.form-div-input select.form-input:focus {
+    outline: none;
+    border-color: var(--secondary-color); /* Foco com a cor primária */
+    box-shadow: 0 0 0 0.25rem var(--tertiary-color);
+}
