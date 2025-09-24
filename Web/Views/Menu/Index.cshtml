@@ -1,29 +1,33 @@
 ﻿@{
-    //Layout = "_LayoutUnauthorized";
+    //Layout = "_LayoutAuthorized";
     ViewData["Title"] = "Cardápio";
 }
 <style>
     .menu-div {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: 0.5fr 1fr 1fr 1fr 1fr 0.5fr; /* header e footer com metade da altura */
-        grid-column-gap: 0px;
-        grid-row-gap: 0px;
+        display: flex;
+        flex-direction: row; 
         min-height: 100vh;
         border-radius: 1rem;
-        /* Sombra inicial mais suave, parecendo um brilho */
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.10);
     }
 
     .left-side-menu-div {
-        grid-area: 1 / 1 / 7 / 2;
+        flex-basis: 25%;
         background-color: var(--secondary-background-color);
-        border-right: 2px solid #dfe6e9;
-        box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+        border-right: 1px solid #dfe6e9;
+        position: sticky;
+        top: 72px; /* altura do header */
+        overflow-y: auto; /* scroll interno se o conteúdo for maior */
+    }
+
+    .right-side-content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
     }
 
     .uper-menu-div {
-        grid-area: 1 / 2 / 2 / 6;
+        flex: 0 0 auto;
         background-color: var(--secondary-background-color);
         display: flex;
         align-items: center;
@@ -31,12 +35,10 @@
         font-size: 1.3rem;
         font-weight: bold;
         color: #2d3436;
-        border-bottom: 2px solid #dfe6e9;
-        box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
     }
 
     .main-menu-div {
-        grid-area: 2 / 2 / 6 / 6;
+        flex: 1 0 auto; 
         background-color: var(--secondary-background-color);
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -45,16 +47,23 @@
     }
 
     .bottom-menu-div {
-        grid-area: 6 / 2 / 7 / 6;
-        background-color: var(--secondary-background-color);
         display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: center;
+        flex: 0 0 auto; 
+        background-color: var(--secondary-background-color);
         font-size: 1.2rem;
         font-weight: bold;
         color: #2d3436;
-        border-top: 2px solid #dfe6e9;
-        box-shadow: 0px -2px 6px rgba(0,0,0,0.1);
+    }
+
+    .bottom-menu-div nav,
+    .bottom-menu-div .pagination {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
 
     .cardapio-item {
@@ -74,29 +83,216 @@
         transform: scale(1.05);
         cursor: pointer;
     }
+
+    .page-link {
+        color: var(--primary-color);
+    }
+
+    .page-link:hover {
+        color: var(--secondary-color);
+    }
+
+    .left-side-menu-div h5 {
+        font-size: 1.0rem;
+        color: var(--primary-color);
+        border-bottom: 1px solid #dfe6e9;
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+    }
+
+    .left-side-menu-div .form-check {
+        margin-bottom: 10px;
+    }
+
+    .left-side-menu-category-div {
+        padding: 10px;
+    }
+
+    .left-side-menu-category-div:first-child {
+        padding-top: 9px;
+    }
+
+    .form-check-input:checked {
+        background-color: var(--primary-color);
+        border-color: var(--secondary-color);
+    }
+
+    .modal-content {
+        border-radius: 1rem;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+
+    .modal-header {
+        background-color: var(--secondary-background-color);
+        
+    }
+
+    .modal-body img {
+        max-height: 250px;
+        object-fit: cover;
+    }
+
+    .modal-footer .btn {
+        font-weight: bold;
+    }
+
 </style>
 
-<div class="container">
+<!-- Modal de Produto -->
+<div class="modal fade" id="productModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <!-- modal maior para destacar o produto -->
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold text-primary">Lasanha Clássica</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <!-- Imagem -->
+                    <div class="col-md-5 text-center">
+                        <img src="https://www.w3schools.com/images/picture.jpg" class="img-fluid rounded shadow-sm">
+                    </div>
 
-    <div class="menu-div">
-        <div class="left-side-menu-div">Menu lateral</div>
-        <div class="uper-menu-div">Cabeçalho</div>
-        <div class="main-menu-div">
+                    <!-- Informações -->
+                    <div class="col-md-7 d-flex flex-column">
+                        <p class="text-muted">
+                            Uma deliciosa lasanha feita com massa artesanal, molho bolonhesa e queijo gratinado.
+                            Servida com acompanhamento de salada fresca.
+                        </p>
 
-            @for (int i = 0; i < 12; i++)
-            {
-                <div class="card card-custom h-100">
-                    <img src="https://www.w3schools.com/images/picture.jpg" class="card-img-top" alt="Lasanha de Carne">
-                    <div class="card-body text-center">
-                        <h5 class="card-title fw-bold">Lasanha Clássica</h5>
-                        <span class="fs-4 fw-bold d-block my-3">R$ 35,00</span>
-                        <a href="#" class="btn btn-primary w-100 rounded-pill">Adicionar ao Carrinho</a>
+                        <!-- Espaçador automático -->
+                        <div class="mt-auto">
+                            <span class="fs-3 fw-bold d-block text-primary mb-3">R$ 35,00</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <!-- Opções extras -->
+                    <div class="col-md-6 mb-3">
+                        <label class="fw-bold">Escolha a quantidade:</label>
+                        <select class="form-select">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="fw-bold">Escolha o sabor:</label>
+                        <select class="form-select">
+                            <option>Padrão</option>
+                            <option>Grande (+R$ 10,00)</option>
+                            <option>Família (+R$ 20,00)</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="fw-bold">Observações:</label>
+                        <textarea class="form-control" rows="2" placeholder="Ex: sem cebola, molho à parte..."></textarea>
                     </div>
                 </div>
-            }
+            </div>
 
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary rounded-pill px-4">Adicionar ao Carrinho</button>
+            </div>
         </div>
-        <div class="bottom-menu-div">Rodapé / Menu inferior</div>
     </div>
-
 </div>
+
+
+
+<div class="container">
+    <div class="menu-div">
+        <div class="left-side-menu-div">
+            <div class="left-side-menu-category-div">
+                <h5 class="fw-bold mb-1">Massas</h5>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="italiana" id="massaItaliana">
+                    <label class="form-check-label" for="massaItaliana">
+                        Massa italiana
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="oriental" id="massaOriental">
+                    <label class="form-check-label" for="massaOriental">
+                        Massa oriental
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="americana" id="massaAmericana">
+                    <label class="form-check-label" for="massaAmericana">
+                        Massa recheada
+                    </label>
+                </div>
+            </div>
+
+            <div class="left-side-menu-category-div">
+                <h5 class="fw-bold mb-1">Sabores</h5>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="italiana" id="massaItaliana">
+                    <label class="form-check-label" for="massaItaliana">
+                        Vegetariana
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="oriental" id="massaOriental">
+                    <label class="form-check-label" for="massaOriental">
+                        Não vegetariana
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="right-side-content">
+            <div class="uper-menu-div">
+
+            </div>
+            <div class="main-menu-div">
+                @for (int i = 0; i < 12; i++)
+                {
+                    <div class="card-custom h-100">
+                        <img src="https://www.w3schools.com/images/picture.jpg" class="card-img-top" alt="Lasanha de Carne">
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold">Lasanha Clássica</h5>
+                            <span class="fs-4 fw-bold d-block my-3">R$ 35,00</span>
+                            <a href="#" class="btn btn-primary w-100 rounded-pill" data-bs-toggle="modal" data-bs-target="#productModal">
+                                Adicionar ao Carrinho
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="bottom-menu-div">
+                <nav>
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#">
+                                <i class="fa fa-angle-double-left"></i>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">
+                                <i class="fa fa-angle-double-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+    </script>
+}

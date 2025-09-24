@@ -21,7 +21,14 @@
 
 /* Estilos para os cartões de produto */
 .card-custom {
-    border: none;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
     border-radius: 1rem;
     /* Sombra inicial mais suave, parecendo um brilho */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.10);

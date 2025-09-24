@@ -9,6 +9,8 @@ namespace Application.AskForPasta.Configurations
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<ILoginWorkFlowFeature, LoginWorkFlowFeature>();
+            services.AddScoped<IProductFeature, ProductFeature>();
+            services.AddScoped<IAddressFeature, AddressFeature>();
 
             return services;
         }

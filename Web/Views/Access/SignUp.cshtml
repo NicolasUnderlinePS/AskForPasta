@@ -162,7 +162,7 @@
 
             $('#prevBtn').on('click', function () {
                 if (currentStep === 1) {
-                    window.location.href = '@Url.Action("Index", "Login")';
+                    window.location.href = '@Url.Action("Login", "Access")';
                 } else {
                     currentStep--;
                     showStep(currentStep);

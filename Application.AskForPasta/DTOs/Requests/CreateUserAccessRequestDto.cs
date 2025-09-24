@@ -2,7 +2,7 @@
 
 namespace Application.AskForPasta.DTOs.Requests
 {
-    public class CreateUserAccessRequestDto : BaseRequest
+    public sealed class CreateUserAccessRequestDto : BaseRequest
     {
         public CreateUserAccessRequestDto(User user) : base(user)
         {
@@ -26,7 +26,7 @@ namespace Application.AskForPasta.DTOs.Requests
         public int UserTypeId { get; set; }
 
         public required string FullName { get; set; }
-        public int Gender { get; set; }
-        public DateTime BirthDate { get; set; }
+        public required int Gender { get; set; }
+        public required DateTime BirthDate { get; set; }
     }
 }

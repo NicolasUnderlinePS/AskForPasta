@@ -12,7 +12,6 @@ namespace Infrastructure.AskForPasta.Configurations
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
-            services.AddScoped<ILoginWorkFlowRepository, LoginWorkFlowRepository>();
 
             return services;
         }

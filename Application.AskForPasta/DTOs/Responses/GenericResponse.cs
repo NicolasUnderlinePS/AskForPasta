@@ -12,7 +12,7 @@ namespace Application.AskForPasta.DTOs.Responses
             public T? Data { get; set; }
             public List<string> Errors { get; set; } = new();
 
-            public static GenericResponse<T> Ok(T data, string message = "")
+            public static GenericResponse<T> Ok(T? data, string message = "")
             {
                 return new GenericResponse<T>
                 {

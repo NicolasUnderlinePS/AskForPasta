@@ -6,6 +6,7 @@ namespace Application.AskForPasta.Interfaces.Repositories
     public interface IUserRepository
     {
         Task<GenericResponse<int>> CreateUserAsync(User entity);
-        Task<GenericResponse<bool>> SelectUserToLoginAsync(string email, string password);
+        Task<GenericResponse<bool>> GetUserToLoginAsync(string email, string password);
+        Task<GenericResponse<User>> GetUserByIdAsync(int id);
     }
 }

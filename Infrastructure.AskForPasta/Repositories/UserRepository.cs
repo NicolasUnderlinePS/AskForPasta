@@ -41,7 +41,24 @@ namespace Infrastructure.AskForPasta.Repositories
             }
         }
 
-        public async Task<GenericResponse<bool>> SelectUserToLoginAsync(string email, string password)
+        public async Task<GenericResponse<User>> GetUserByIdAsync(int id)
+        {
+            try
+            {
+                User? user = await _context.User.Where(u => u.Id == id).FirstOrDefaultAsync();
+
+                if (user == null)
+                    return GenericResponse<User>.Fail("Usuário não foi encontrado.");
+
+                return GenericResponse<User>.Ok(user, "Usuário encontrado com sucesso.");
+            }
+            catch (Exception ex)
+            {
+                return GenericResponse<User>.Fail("Ocorreu um erro inesperado ao buscar o usuário.", new List<string> { ex.Message });
+            }
+        }
+
+        public async Task<GenericResponse<bool>> GetUserToLoginAsync(string email, string password)
         {
             try
             {
