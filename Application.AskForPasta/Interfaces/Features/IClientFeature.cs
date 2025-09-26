@@ -1,10 +1,11 @@
 ﻿using Application.AskForPasta.DTOs.Requests;
+using Application.AskForPasta.DTOs.Responses;
 using Application.AskForPasta.DTOs.Responses.Application.Common.Responses;
 
 namespace Application.AskForPasta.Interfaces.Features
 {
-    public interface IClientFeature
+    public interface IClientFeature : IBaseFeature<CreateClientRequestDto, ClientResponseDto>
     {
-        Task<GenericResponse<int>> CreateClientAsync(CreateClientRequestDto request);
+
     }
 }

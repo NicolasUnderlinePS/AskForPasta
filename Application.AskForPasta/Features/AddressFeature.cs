@@ -17,17 +17,25 @@ namespace Application.AskForPasta.Features
             this.addressRepository = addressRepository;
         }
 
-        public async Task<GenericResponse<int>> CreateAddressAsync(CreateAddressRequestDto request)
+        public async Task<GenericResponse<AddressResponseDto>> CreateAsync(CreateAddressRequestDto request)
         {
-            GenericResponse<int> response = GenericResponse<int>.Ok(0);
             Address address = new Address(request.ZipCode, request.Street, request.Neighborhood, request.Number, request.Complement, request.City, request.State, request.RequestTime);
+            
+            GenericResponse<int> response = GenericResponse<int>.Ok(0);
                 
-            response = await addressRepository.CreateAddressAsync(address);
+            response = await addressRepository.CreateAsync(address);
 
             if (response.Success)
-                return GenericResponse<int>.Ok(address.Id, response.Message);
+                return await GetByIdAsync(response.Data);
             else
-                return GenericResponse<int>.Fail(response.Message, response.Errors);
+                return GenericResponse<AddressResponseDto>.Fail(response.Message, response.Errors);
+        }
+
+        public async Task<GenericResponse<AddressResponseDto>> GetByIdAsync(int id)
+        {
+            GenericResponse<Address> entity = await addressRepository.GetByIdAsync(id);
+
+            return GenericResponse<AddressResponseDto>.Ok(AddressExtension.AddressResponseDto(entity.Data), entity.Message);
         }
     }
 }

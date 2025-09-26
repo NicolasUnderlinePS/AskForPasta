@@ -15,7 +15,7 @@ namespace Infrastructure.AskForPasta.Repositories
             _context = context;
         }
 
-        public async Task<GenericResponse<int>> CreateClientAsync(Client entity)
+        public async Task<GenericResponse<int>> CreateAsync(Client entity)
         {
             await _context.Client.AddAsync(entity);
             await _context.SaveChangesAsync();
@@ -23,7 +23,7 @@ namespace Infrastructure.AskForPasta.Repositories
             return GenericResponse<int>.Ok(entity.Id, "Cliente cadastrado com sucesso.");
         }
 
-        public async Task<GenericResponse<Client>> GetClientByIdAsync(int id)
+        public async Task<GenericResponse<Client>> GetByIdAsync(int id)
         {
             Client? entity = await _context.Client.Where(u => u.Id == id).FirstOrDefaultAsync();
 

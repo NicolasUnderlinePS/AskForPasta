@@ -15,7 +15,7 @@ namespace Infrastructure.AskForPasta.Repositories
             _context = context;
         }
 
-        public async Task<GenericResponse<int>> CreateUserAsync(User entity)
+        public async Task<GenericResponse<int>> CreateAsync(User entity)
         {
             await _context.User.AddAsync(entity);
             await _context.SaveChangesAsync();
@@ -23,7 +23,7 @@ namespace Infrastructure.AskForPasta.Repositories
             return GenericResponse<int>.Ok(entity.Id, "Usuário criado com sucesso.");
         }
 
-        public async Task<GenericResponse<User>> GetUserByIdAsync(int id)
+        public async Task<GenericResponse<User>> GetByIdAsync(int id)
         {
             User? entity = await _context.User.Where(u => u.Id == id).FirstOrDefaultAsync();
 

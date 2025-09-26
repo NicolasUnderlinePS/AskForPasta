@@ -23,7 +23,7 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequestDto request)
         {
-            GenericResponse<ProductResponseDto> response = await productFeature.CreateProductAsync(request);
+            GenericResponse<ProductResponseDto> response = await productFeature.CreateAsync(request);
 
             if (response.Success == false)
                 return BadRequest(response);

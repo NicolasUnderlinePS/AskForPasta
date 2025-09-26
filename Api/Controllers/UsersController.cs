@@ -19,7 +19,6 @@ namespace Api.Controllers
             this.userFeature = userFeature;
         }
 
-
         // POST /api/users → criar usuário
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserAccessRequestDto request)
@@ -36,7 +35,7 @@ namespace Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(int id)
         {
-            GenericResponse<UserResponseDto> response = await userFeature.GetUserByIdAsync(id);
+            GenericResponse<UserResponseDto> response = await userFeature.GetByIdAsync(id);
 
             if (response.Success == false || response.Data == null)
                 return NotFound(response.Data);

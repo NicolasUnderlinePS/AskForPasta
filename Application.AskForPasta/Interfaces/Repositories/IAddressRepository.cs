@@ -3,9 +3,8 @@ using Domain.AskForPasta.Entities;
 
 namespace Application.AskForPasta.Interfaces.Repositories
 {
-    public interface IAddressRepository
+    public interface IAddressRepository : IBaseRepository<Address>
     {
-        Task<GenericResponse<int>> CreateAddressAsync(Address entity);
-        Task<GenericResponse<Address>> GetAddressByIdAsync(int id);
+
     }
 }

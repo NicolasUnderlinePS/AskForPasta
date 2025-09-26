@@ -15,7 +15,7 @@ namespace Infrastructure.AskForPasta.Repositories
             _context = context;
         }
 
-        public async Task<GenericResponse<int>> CreateAddressAsync(Address entity)
+        public async Task<GenericResponse<int>> CreateAsync(Address entity)
         {
             await _context.Address.AddAsync(entity);
             await _context.SaveChangesAsync();
@@ -23,7 +23,7 @@ namespace Infrastructure.AskForPasta.Repositories
             return GenericResponse<int>.Ok(entity.Id, "Endereço criado com sucesso.");
         }
 
-        public async Task<GenericResponse<Address>> GetAddressByIdAsync(int id)
+        public async Task<GenericResponse<Address>> GetByIdAsync(int id)
         {
             Address? entity = await _context.Address.Where(u => u.Id == id).FirstOrDefaultAsync();
 

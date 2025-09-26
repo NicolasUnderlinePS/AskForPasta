@@ -15,7 +15,7 @@ namespace Infrastructure.AskForPasta.Repositories
             _context = context;
         }
 
-        public async Task<GenericResponse<int>> CreateProductAsync(Product entity)
+        public async Task<GenericResponse<int>> CreateAsync(Product entity)
         {
             await _context.Product.AddAsync(entity);
             await _context.SaveChangesAsync();
@@ -23,7 +23,7 @@ namespace Infrastructure.AskForPasta.Repositories
             return GenericResponse<int>.Ok(entity.Id, "Produto criado com sucesso.");
         }
 
-        public async Task<GenericResponse<Product>> GetProductByIdAsync(int id)
+        public async Task<GenericResponse<Product>> GetByIdAsync(int id)
         {
             Product? entity = await _context.Product.Where(u => u.Id == id).FirstOrDefaultAsync();
 

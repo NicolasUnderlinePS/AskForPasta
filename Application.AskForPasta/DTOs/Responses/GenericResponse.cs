@@ -1,6 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace Application.AskForPasta.DTOs.Responses
+﻿namespace Application.AskForPasta.DTOs.Responses
 {
     namespace Application.Common.Responses
     {
@@ -30,6 +28,11 @@ namespace Application.AskForPasta.DTOs.Responses
                     Message = message,
                     Errors = errors ?? new List<string>()
                 };
+            }
+
+            public bool IsInvalidReturn()
+            {
+                return (Success == false || Data == null);
             }
         }
     }

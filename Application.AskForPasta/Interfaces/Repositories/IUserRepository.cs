@@ -3,10 +3,8 @@ using Domain.AskForPasta.Entities;
 
 namespace Application.AskForPasta.Interfaces.Repositories
 {
-    public interface IUserRepository
+    public interface IUserRepository : IBaseRepository<User>
     {
-        Task<GenericResponse<int>> CreateUserAsync(User entity);
         Task<GenericResponse<bool>> GetUserToLoginAsync(string email, string password);
-        Task<GenericResponse<User>> GetUserByIdAsync(int id);
     }
 }

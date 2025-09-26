@@ -5,10 +5,8 @@ using Domain.AskForPasta.Entities;
 
 namespace Application.AskForPasta.Interfaces.Features
 {
-    public interface IProductFeature
+    public interface IProductFeature : IBaseFeature<CreateProductRequestDto, ProductResponseDto>
     {
-        Task<GenericResponse<ProductResponseDto>> CreateProductAsync(CreateProductRequestDto request);
 
-        Task<GenericResponse<ProductResponseDto>> GetProductByIdAsync(int id);
     }
 }

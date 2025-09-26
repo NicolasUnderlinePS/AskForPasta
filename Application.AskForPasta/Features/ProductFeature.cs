@@ -17,21 +17,21 @@ namespace Application.AskForPasta.Features
             this.productRepository = productRepository;
         }
 
-        public async Task<GenericResponse<ProductResponseDto>> CreateProductAsync(CreateProductRequestDto request)
+        public async Task<GenericResponse<ProductResponseDto>> CreateAsync(CreateProductRequestDto request)
         {
             Product entity = new Product(request.Name, request.Code, string.Empty, request.Price, request.StockQuantity, request.RequestTime);
 
-            GenericResponse<int> response = await productRepository.CreateProductAsync(entity);
+            GenericResponse<int> response = await productRepository.CreateAsync(entity);
 
             if (response.Success)
-                return await GetProductByIdAsync(response.Data);
+                return await GetByIdAsync(response.Data);
             else
                 return GenericResponse<ProductResponseDto>.Fail(response.Message, response.Errors);
         }
 
-        public async Task<GenericResponse<ProductResponseDto>> GetProductByIdAsync(int id)
+        public async Task<GenericResponse<ProductResponseDto>> GetByIdAsync(int id)
         {
-            GenericResponse<Product> entity = await productRepository.GetProductByIdAsync(id);
+            GenericResponse<Product> entity = await productRepository.GetByIdAsync(id);
 
             return GenericResponse<ProductResponseDto>.Ok(ProductExtension.ProductResponseDto(entity.Data), entity.Message);
         }
