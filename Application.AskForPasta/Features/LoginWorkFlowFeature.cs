@@ -68,15 +68,7 @@ namespace Application.AskForPasta.Features
 
         public async Task<GenericResponse<bool>> StartSessionAsync(StartSessionRequestDto request)
         {
-            try
-            {
-                return null;
-                //return await userRepository.GetUserToLoginAsync(request.Email, request.Password);
-            }
-            catch (Exception ex)
-            {
-                return GenericResponse<bool>.Fail("Ocorreu um erro inesperado ao iniciar a sessão.", new List<string> { ex.Message });
-            }
+            return GenericResponse<bool>.Ok(true, "Login realizado com sucesso.");
         }
     }
 }

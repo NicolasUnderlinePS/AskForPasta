@@ -32,5 +32,15 @@ namespace Infrastructure.AskForPasta.Repositories
 
             return GenericResponse<Product>.Ok(entity, "Produto encontrado com sucesso.");
         }
+
+        public Task<GenericResponse<int>> IncreaseFromStock(int productId, int quantity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<GenericResponse<int>> SubtractFromStock(int productId, int quantity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
