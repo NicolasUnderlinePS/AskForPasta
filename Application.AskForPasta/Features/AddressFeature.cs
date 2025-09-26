@@ -19,22 +19,15 @@ namespace Application.AskForPasta.Features
 
         public async Task<GenericResponse<int>> CreateAddressAsync(CreateAddressRequestDto request)
         {
-            try
-            {
-                GenericResponse<int> response = GenericResponse<int>.Ok(0);
-                Address address = new Address(request.ZipCode, request.Street, request.Neighborhood, request.Number, request.Complement, request.City, request.State, request.RequestTime);
+            GenericResponse<int> response = GenericResponse<int>.Ok(0);
+            Address address = new Address(request.ZipCode, request.Street, request.Neighborhood, request.Number, request.Complement, request.City, request.State, request.RequestTime);
                 
-                response = await addressRepository.CreateAddressAsync(address);
+            response = await addressRepository.CreateAddressAsync(address);
 
-                if (response.Success)
-                    return GenericResponse<int>.Ok(address.Id, response.Message);
-                else
-                    return GenericResponse<int>.Fail(response.Message, response.Errors);
-            }
-            catch (Exception ex)
-            {
-                return GenericResponse<int>.Fail("Ocorreu um erro inesperado ao criar o endereço.", new List<string> { ex.Message });
-            }
+            if (response.Success)
+                return GenericResponse<int>.Ok(address.Id, response.Message);
+            else
+                return GenericResponse<int>.Fail(response.Message, response.Errors);
         }
     }
 }

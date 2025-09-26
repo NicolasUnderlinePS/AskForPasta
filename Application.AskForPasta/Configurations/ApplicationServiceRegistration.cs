@@ -11,6 +11,8 @@ namespace Application.AskForPasta.Configurations
             services.AddScoped<ILoginWorkFlowFeature, LoginWorkFlowFeature>();
             services.AddScoped<IProductFeature, ProductFeature>();
             services.AddScoped<IAddressFeature, AddressFeature>();
+            services.AddScoped<IClientFeature, ClientFeature>();
+            services.AddScoped<IUserFeature, UserFeature>();
 
             return services;
         }

@@ -11,10 +11,12 @@ namespace Api.Controllers
     public class UsersController : BaseUnauthorizedController
     {
         private readonly ILoginWorkFlowFeature loginWorkFlowFeature;
+        private readonly IUserFeature userFeature;
 
-        public UsersController(ILoginWorkFlowFeature loginWorkFlowFeature)
+        public UsersController(ILoginWorkFlowFeature loginWorkFlowFeature, IUserFeature userFeature)
         {
             this.loginWorkFlowFeature = loginWorkFlowFeature;
+            this.userFeature = userFeature;
         }
 
 
@@ -22,21 +24,19 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserAccessRequestDto request)
         {
-            GenericResponse<CreateUserResponseDto> response = await loginWorkFlowFeature.CreateUserAccessAsync(request);
+            GenericResponse<UserResponseDto> response = await loginWorkFlowFeature.CreateUserAccessAsync(request);
 
             if (response.Success == false)
                 return BadRequest(response);
 
-            return Ok(response.Data);
-
-            //return CreatedAtAction(nameof(GetUserById), response.Data.UserId);            
+            return Ok(response.Data);       
         }
 
         // GET /api/users/{id} → buscar usuário
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(int id)
         {
-            GenericResponse<UserResponseDto> response = await loginWorkFlowFeature.GetUserByIdAsync(id);
+            GenericResponse<UserResponseDto> response = await userFeature.GetUserByIdAsync(id);
 
             if (response.Success == false || response.Data == null)
                 return NotFound(response.Data);

@@ -3,9 +3,9 @@ using Domain.AskForPasta.Entities;
 
 namespace Application.AskForPasta.Interfaces.Repositories
 {
-    public interface IClientRepository
+    public interface IProductRepository
     {
-        Task<GenericResponse<int>> CreateClientAsync(Client entity);
-        Task<GenericResponse<Client>> GetClientByIdAsync(int id);
+        Task<GenericResponse<int>> CreateProductAsync(Product entity);
+        Task<GenericResponse<Product>> GetProductByIdAsync(int id);
     }
 }

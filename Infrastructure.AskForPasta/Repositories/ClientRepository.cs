@@ -3,11 +3,6 @@ using Application.AskForPasta.Interfaces.Repositories;
 using Domain.AskForPasta.Entities;
 using Infrastructure.AskForPasta.Contexts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.AskForPasta.Repositories
 {
@@ -22,28 +17,20 @@ namespace Infrastructure.AskForPasta.Repositories
 
         public async Task<GenericResponse<int>> CreateClientAsync(Client entity)
         {
-            try
-            {
-                await _context.Client.AddAsync(entity);
-                await _context.SaveChangesAsync();
+            await _context.Client.AddAsync(entity);
+            await _context.SaveChangesAsync();
 
-                return GenericResponse<int>.Ok(entity.Id, "Cliente cadastrado com sucesso.");
-            }
-            catch (DbUpdateConcurrencyException concEx)
-            {
-                // Conflito de concorrência
-                return GenericResponse<int>.Fail("Não foi possível salvar o cliente, tente novamente.", new List<string>() { concEx.Message });
-            }
-            catch (DbUpdateException dbEx)
-            {
-                // Captura problemas de banco, como violação de FK, constraints etc.
-                return GenericResponse<int>.Fail("Não foi possível salvar o cliente no momento.", new List<string>() { dbEx.Message });
-            }
-            catch (Exception ex)
-            {
-                // Exceção genérica
-                return GenericResponse<int>.Fail("Ocorreu um erro inesperado, tente novamente mais tarde.", new List<string>() { ex.Message });
-            }
+            return GenericResponse<int>.Ok(entity.Id, "Cliente cadastrado com sucesso.");
+        }
+
+        public async Task<GenericResponse<Client>> GetClientByIdAsync(int id)
+        {
+            Client? entity = await _context.Client.Where(u => u.Id == id).FirstOrDefaultAsync();
+
+            if (entity == null)
+                return GenericResponse<Client>.Fail("Cliente não foi encontrado.");
+
+            return GenericResponse<Client>.Ok(entity, "Cliente encontrado com sucesso.");
         }
     }
 }

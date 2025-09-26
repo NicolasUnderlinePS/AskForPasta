@@ -17,28 +17,20 @@ namespace Infrastructure.AskForPasta.Repositories
 
         public async Task<GenericResponse<int>> CreateAddressAsync(Address entity)
         {
-            try
-            {
-                await _context.Address.AddAsync(entity);
-                await _context.SaveChangesAsync();
+            await _context.Address.AddAsync(entity);
+            await _context.SaveChangesAsync();
 
-                return GenericResponse<int>.Ok(entity.Id, "Endereço criado com sucesso.");
-            }
-            catch (DbUpdateConcurrencyException concEx)
-            {
-                // Conflito de concorrência
-                return GenericResponse<int>.Fail("Não foi possível salvar o endereço, tente novamente.", new List<string>(){ concEx.Message });
-            }
-            catch (DbUpdateException dbEx)
-            {
-                // Captura problemas de banco, como violação de FK, constraints etc.
-                return GenericResponse<int>.Fail("Não foi possível salvar o endereço no momento.", new List<string>() { dbEx.Message });
-            }
-            catch (Exception ex)
-            {
-                // Exceção genérica
-                return GenericResponse<int>.Fail("Ocorreu um erro inesperado, tente novamente mais tarde.", new List<string>() { ex.Message });
-            }
+            return GenericResponse<int>.Ok(entity.Id, "Endereço criado com sucesso.");
+        }
+
+        public async Task<GenericResponse<Address>> GetAddressByIdAsync(int id)
+        {
+            Address? entity = await _context.Address.Where(u => u.Id == id).FirstOrDefaultAsync();
+
+            if (entity == null)
+                return GenericResponse<Address>.Fail("Endereço não foi encontrado.");
+
+            return GenericResponse<Address>.Ok(entity, "Endereço encontrado com sucesso.");
         }
     }
 }

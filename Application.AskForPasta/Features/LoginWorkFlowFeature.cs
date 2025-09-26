@@ -2,10 +2,7 @@
 using Application.AskForPasta.DTOs.Requests.Validators;
 using Application.AskForPasta.DTOs.Responses;
 using Application.AskForPasta.DTOs.Responses.Application.Common.Responses;
-using Application.AskForPasta.Extensions;
 using Application.AskForPasta.Interfaces.Features;
-using Application.AskForPasta.Interfaces.Repositories;
-using Domain.AskForPasta.Entities;
 using FluentValidation.Results;
 
 namespace Application.AskForPasta.Features
@@ -27,38 +24,31 @@ namespace Application.AskForPasta.Features
         public async Task<GenericResponse<UserResponseDto>> CreateUserAccessAsync(CreateUserAccessRequestDto request)
         {
             List<string> errors = new();
-            try
-            {
-                CreateUserAccessRequestValidator validator = new();
 
-                ValidationResult validationResult = await validator.ValidateAsync(request);
+            CreateUserAccessRequestValidator validator = new();
 
-                if (validationResult.IsValid == false)
-                    return GenericResponse<UserResponseDto>.Fail("Os dados informados são inválidos.", validationResult.Errors.Select(e => e.ErrorMessage).ToList());
+            ValidationResult validationResult = await validator.ValidateAsync(request);
 
-                GenericResponse<int> addressResult = await addressFeature.CreateAddressAsync(new CreateAddressRequestDto(request.User) { ZipCode = request.ZipCode, Street = request.Street, Neighborhood = request.Neighborhood, Number = request.Number, Complement = request.Complement, City = request.City, State = request.State });
-                if (addressResult.Success == false) 
-                    return GenericResponse<UserResponseDto>.Fail(addressResult.Message, addressResult.Errors);
+            if (validationResult.IsValid == false)
+                return GenericResponse<UserResponseDto>.Fail("Os dados informados são inválidos.", validationResult.Errors.Select(e => e.ErrorMessage).ToList());
 
-                request.AddressId = addressResult.Data;
+            GenericResponse<int> addressResult = await addressFeature.CreateAddressAsync(new CreateAddressRequestDto(request.User) { ZipCode = request.ZipCode, Street = request.Street, Neighborhood = request.Neighborhood, Number = request.Number, Complement = request.Complement, City = request.City, State = request.State });
+            if (addressResult.Success == false)
+                return GenericResponse<UserResponseDto>.Fail(addressResult.Message, addressResult.Errors);
 
-                GenericResponse<int> userResult = await userFeature.CreateUserAsync(new CreateUserRequestDto(request.User) { NickName = request.NickName, CellPhone = request.CellPhone, Document = request.Document, Email = request.Email, Password = request.Password, UserTypeId = request.UserTypeId});
-                if (userResult.Success == false) 
-                    return GenericResponse<UserResponseDto>.Fail(userResult.Message, userResult.Errors);
+            request.AddressId = addressResult.Data;
 
-                request.UserId = userResult.Data;
+            GenericResponse<int> userResult = await userFeature.CreateUserAsync(new CreateUserRequestDto(request.User) { NickName = request.NickName, CellPhone = request.CellPhone, Document = request.Document, Email = request.Email, Password = request.Password, UserTypeId = request.UserTypeId });
+            if (userResult.Success == false)
+                return GenericResponse<UserResponseDto>.Fail(userResult.Message, userResult.Errors);
 
-                GenericResponse<int> clientResult = await clientFeature.CreateClientAsync(new CreateClientRequestDto (request.User) {FullName = request.FullName, AddressId = request.AddressId, BirthDate = request.BirthDate, Gender = request.Gender, UserId = request.UserId});
-                if (clientResult.Success == false) 
-                    return GenericResponse<UserResponseDto>.Fail(clientResult.Message, clientResult.Errors);
+            request.UserId = userResult.Data;
 
+            GenericResponse<int> clientResult = await clientFeature.CreateClientAsync(new CreateClientRequestDto(request.User) { FullName = request.FullName, AddressId = request.AddressId, BirthDate = request.BirthDate, Gender = request.Gender, UserId = request.UserId });
+            if (clientResult.Success == false)
+                return GenericResponse<UserResponseDto>.Fail(clientResult.Message, clientResult.Errors);
 
-                return await userFeature.GetUserByIdAsync(request.UserId);
-            }
-            catch (Exception ex)
-            {
-                return GenericResponse<UserResponseDto>.Fail("Ocorreu um erro inesperado ao criar o usuário.", new List<string> { ex.Message });
-            }
+            return await userFeature.GetUserByIdAsync(request.UserId);
         }
 
         public Task<GenericResponse<bool>> EndSessionAsync(int userId)
@@ -81,7 +71,7 @@ namespace Application.AskForPasta.Features
             try
             {
                 return null;
-               //return await userRepository.GetUserToLoginAsync(request.Email, request.Password);
+                //return await userRepository.GetUserToLoginAsync(request.Email, request.Password);
             }
             catch (Exception ex)
             {

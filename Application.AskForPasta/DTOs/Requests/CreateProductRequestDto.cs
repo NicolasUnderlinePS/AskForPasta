@@ -9,6 +9,9 @@ namespace Application.AskForPasta.DTOs.Requests
         }
 
         public required string Name { get; set; }
+        public required string Code { get; set; }
+        public required decimal Price { get; set; }
+        public required int StockQuantity { get; set; }
 
     }
 }

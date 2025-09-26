@@ -5,18 +5,18 @@ namespace Application.AskForPasta.Extensions
 {
     public static class UserExtension
     {
-        public static CreateUserResponseDto? CreateUserResponseDto(User user)
+        public static CreateUserResponseDto? CreateUserResponseDto(User entity)
         {
-            if (user == null) return null;
+            if (entity == null) return null;
 
-            return new CreateUserResponseDto (user.Id, user.NickName, user.Document, user.Email, user.CellPhone, user.IsActive, user.UserTypeId);
+            return new CreateUserResponseDto (entity.Id, entity.NickName, entity.Document, entity.Email, entity.CellPhone, entity.IsActive, entity.UserTypeId);
         }
 
-        public static UserResponseDto? UserResponseDto(User? user)
+        public static UserResponseDto? UserResponseDto(User? entity)
         {
-            if (user == null) return null;
+            if (entity == null) return null;
 
-            return new UserResponseDto (user.Id, user.NickName, user.Document, user.Email, user.CellPhone, user.IsActive, user.UserTypeId);
+            return new UserResponseDto (entity.Id, entity.NickName, entity.Document, entity.Email, entity.CellPhone, entity.IsActive, entity.UserTypeId);
         }
 
 

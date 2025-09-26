@@ -25,36 +25,22 @@ namespace Application.AskForPasta.Features
 
         public async Task<GenericResponse<int>> CreateUserAsync(CreateUserRequestDto request)
         {
-            try
-            {
-                GenericResponse<int> response = GenericResponse<int>.Ok(0);
-                User user = new User(request.NickName, request.Document, request.Email, request.CellPhone, false, request.Password, request.UserTypeId, request.RequestTime);
+            GenericResponse<int> response = GenericResponse<int>.Ok(0);
+            User user = new User(request.NickName, request.Document, request.Email, request.CellPhone, false, request.Password, request.UserTypeId, request.RequestTime);
 
-                response = await userRepository.CreateUserAsync(user);
+            response = await userRepository.CreateUserAsync(user);
 
-                if (response.Success)
-                    return GenericResponse<int>.Ok(user.Id, response.Message);
-                else
-                    return GenericResponse<int>.Fail(response.Message, response.Errors);
-            }
-            catch (Exception ex)
-            {
-                return GenericResponse<int>.Fail("Ocorreu um erro inesperado ao criar o usuário.", new List<string> { ex.Message });
-            }
+            if (response.Success)
+                return GenericResponse<int>.Ok(user.Id, response.Message);
+            else
+                return GenericResponse<int>.Fail(response.Message, response.Errors);
         }
 
         public async Task<GenericResponse<UserResponseDto>> GetUserByIdAsync(int id)
         {
-            try
-            {
-                GenericResponse<User> user = await userRepository.GetUserByIdAsync(id);
+            GenericResponse<User> user = await userRepository.GetUserByIdAsync(id);
 
-                return GenericResponse<UserResponseDto>.Ok(UserExtension.UserResponseDto(user.Data), user.Message);
-            }
-            catch (Exception ex)
-            {
-                return GenericResponse<UserResponseDto>.Fail("Ocorreu um erro inesperado ao consultar o usuário.", new List<string> { ex.Message });
-            }
+            return GenericResponse<UserResponseDto>.Ok(UserExtension.UserResponseDto(user.Data), user.Message);
         }
     }
 }
