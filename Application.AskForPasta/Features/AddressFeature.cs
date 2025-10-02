@@ -17,18 +17,34 @@ namespace Application.AskForPasta.Features
             this.addressRepository = addressRepository;
         }
 
-        public async Task<GenericResponse<AddressResponseDto>> CreateAsync(CreateAddressRequestDto request)
+        private async Task<GenericResponse<AddressResponseDto>> UpdateAddressAsync(int addressId, Action<Address> updateAction, string successMessage = "")
         {
-            Address address = new Address(request.ZipCode, request.Street, request.Neighborhood, request.Number, request.Complement, request.City, request.State, request.RequestTime);
+            GenericResponse<Address> response = await addressRepository.GetByIdAsync(addressId);
+
+            if (response.IsInvalidReturn())
+                return GenericResponse<AddressResponseDto>.Fail("Endereço não foi encontrado.");
+
+            Address entity = response.Data!;
+
+            updateAction(entity);
+
+            response = await addressRepository.UpdateAsync(entity);
+
+            return GenericResponse<AddressResponseDto>.Ok(AddressExtension.AddressResponseDto(response.Data), string.IsNullOrEmpty(successMessage) ? response.Message : successMessage);
+        }
+
+        public async Task<GenericResponse<AddressResponseDto>> InsertAsync(CreateAddressRequestDto request)
+        {
+            Address entity = new Address(request.ZipCode, request.Street, request.Neighborhood, request.Number, request.Complement, request.City, request.State, request.RequestTime);
             
             GenericResponse<int> response = GenericResponse<int>.Ok(0);
                 
-            response = await addressRepository.CreateAsync(address);
+            response = await addressRepository.InsertAsync(entity);
 
-            if (response.Success)
-                return await GetByIdAsync(response.Data);
-            else
+            if (response.IsInvalidReturn())
                 return GenericResponse<AddressResponseDto>.Fail(response.Message, response.Errors);
+                
+            return await GetByIdAsync(response.Data);
         }
 
         public async Task<GenericResponse<AddressResponseDto>> GetByIdAsync(int id)
@@ -36,6 +52,11 @@ namespace Application.AskForPasta.Features
             GenericResponse<Address> entity = await addressRepository.GetByIdAsync(id);
 
             return GenericResponse<AddressResponseDto>.Ok(AddressExtension.AddressResponseDto(entity.Data), entity.Message);
+        }
+
+        public async Task<GenericResponse<AddressResponseDto>> UpdateAsync(UpdateAddressRequestDto request)
+        {
+            return await UpdateAddressAsync(request.AddressId, p => p.UpdateAddress(request.ZipCode, request.Street, request.Neighborhood, request.Number, request.Complement, request.City, request.State), "Endereço atualizada com sucesso.");
         }
     }
 }

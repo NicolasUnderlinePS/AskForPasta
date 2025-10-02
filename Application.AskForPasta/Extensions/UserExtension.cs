@@ -16,7 +16,7 @@ namespace Application.AskForPasta.Extensions
         {
             if (entity == null) return null;
 
-            return new UserResponseDto (entity.Id, entity.NickName, entity.Document, entity.Email, entity.CellPhone, entity.IsActive, entity.UserTypeId);
+            return new UserResponseDto (entity.Id, entity.NickName, entity.Document, entity.Email, entity.CellPhone, entity.IsActive, entity.UserTypeId, entity.EncryptPassword);
         }
 
 

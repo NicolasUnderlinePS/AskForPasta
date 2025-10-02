@@ -2,7 +2,7 @@
 {
     public class PurchaseLog : BaseEntity
     {
-        public PurchaseLog(int id, int purchaseId, int oldStatusId, int newStatusId, DateTime createAt) : base(id, createAt)
+        public PurchaseLog(int purchaseId, int oldStatusId, int newStatusId, DateTime createAt) : base(createAt)
         {
             PurchaseId = purchaseId;
             OldStatusId = oldStatusId;

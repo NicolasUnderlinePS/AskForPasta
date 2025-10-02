@@ -13,6 +13,9 @@ namespace Infrastructure.AskForPasta.Configurations
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IPurchaseRepository, PurchaseRepository>();
+            services.AddScoped<IPurchaseProductRepository, PurchaseProductRepository>();
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
 
             return services;
         }

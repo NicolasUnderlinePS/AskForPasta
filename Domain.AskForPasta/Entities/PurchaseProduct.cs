@@ -2,13 +2,13 @@
 {
     public class PurchaseProduct : BaseEntity
     {
-        public PurchaseProduct(int id, int purchaseId, int productId, int quantity, decimal unitPrice, decimal totalPrice, DateTime createAt) : base(id, createAt)
+        public PurchaseProduct(int purchaseId, int productId, int quantity, decimal unitPrice, DateTime createAt) : base(createAt)
         {
             PurchaseId = purchaseId;
             ProductId = productId;
             Quantity = quantity;
             UnitPrice = unitPrice;
-            TotalPrice = totalPrice;
+            TotalPrice = unitPrice * quantity;
         }
 
         public int PurchaseId { get; private set; }

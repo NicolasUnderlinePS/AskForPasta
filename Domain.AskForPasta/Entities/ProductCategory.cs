@@ -2,7 +2,7 @@
 {
     public class ProductCategory : BaseEntity
     {
-        public ProductCategory(int id, string code, string categoryDescription, DateTime createAt) : base(id, createAt)
+        public ProductCategory(string code, string categoryDescription, DateTime createAt) : base(createAt)
         {
             Code = code;
             CategoryDescription = categoryDescription;

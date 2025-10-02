@@ -15,7 +15,7 @@ namespace Infrastructure.AskForPasta.Repositories
             _context = context;
         }
 
-        public async Task<GenericResponse<int>> CreateAsync(Address entity)
+        public async Task<GenericResponse<int>> InsertAsync(Address entity)
         {
             await _context.Address.AddAsync(entity);
             await _context.SaveChangesAsync();
@@ -31,6 +31,13 @@ namespace Infrastructure.AskForPasta.Repositories
                 return GenericResponse<Address>.Fail("Endereço não foi encontrado.");
 
             return GenericResponse<Address>.Ok(entity, "Endereço encontrado com sucesso.");
+        }
+
+        public async Task<GenericResponse<Address>> UpdateAsync(Address entity)
+        {
+            await _context.SaveChangesAsync();
+
+            return GenericResponse<Address>.Ok(entity, "Endereço atualizado com sucesso.");
         }
     }
 }

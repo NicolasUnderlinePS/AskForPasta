@@ -10,7 +10,7 @@ namespace Application.AskForPasta.Extensions
 {
     public static class ClientExtension
     {
-        public static ClientResponseDto? AddressResponseDto(Client? entity)
+        public static ClientResponseDto? ClientResponseDto(Client? entity)
         {
             if (entity == null) return null;
 

@@ -13,6 +13,7 @@ namespace Application.AskForPasta.Configurations
             services.AddScoped<IAddressFeature, AddressFeature>();
             services.AddScoped<IClientFeature, ClientFeature>();
             services.AddScoped<IUserFeature, UserFeature>();
+            services.AddScoped<IPurchaseFeature, PurchaseFeature>();
 
             return services;
         }

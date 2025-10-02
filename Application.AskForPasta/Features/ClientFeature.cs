@@ -5,11 +5,6 @@ using Application.AskForPasta.Extensions;
 using Application.AskForPasta.Interfaces.Features;
 using Application.AskForPasta.Interfaces.Repositories;
 using Domain.AskForPasta.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.AskForPasta.Features
 {
@@ -22,25 +17,43 @@ namespace Application.AskForPasta.Features
             this.clientRepository = clientRepository;
         }
 
-        public async Task<GenericResponse<ClientResponseDto>> CreateAsync(CreateClientRequestDto request)
+        private async Task<GenericResponse<ClientResponseDto>> UpdateClientAsync(int clientId, Action<Client> updateAction, string successMessage = "")
         {
-            Client client = new Client(request.FullName, request.Gender, request.BirthDate, request.AddressId, request.UserId, request.RequestTime);
-            
+            GenericResponse<Client> response = await clientRepository.GetByIdAsync(clientId);
+
+            if (response.IsInvalidReturn())
+                return GenericResponse<ClientResponseDto>.Fail("Cliente não foi encontrado.");
+
+            Client entity = response.Data!;
+
+            updateAction(entity);
+
+            response = await clientRepository.UpdateAsync(entity);
+
+            return GenericResponse<ClientResponseDto>.Ok(ClientExtension.ClientResponseDto(response.Data), string.IsNullOrEmpty(successMessage) ? response.Message : successMessage);
+        }
+        public async Task<GenericResponse<ClientResponseDto>> InsertAsync(CreateClientRequestDto request)
+        {
+            Client entity = new Client(request.FullName, request.Gender, request.BirthDate, request.AddressId, request.UserId, request.RequestTime);
+
             GenericResponse<int> response = GenericResponse<int>.Ok(0);
 
-            response = await clientRepository.CreateAsync(client);
+            response = await clientRepository.InsertAsync(entity);
 
-            if (response.Success)
-                return await GetByIdAsync(response.Data);
-            else
+            if (response.IsInvalidReturn())
                 return GenericResponse<ClientResponseDto>.Fail(response.Message, response.Errors);
-        }
 
+            return await GetByIdAsync(response.Data);
+        }
         public async Task<GenericResponse<ClientResponseDto>> GetByIdAsync(int id)
         {
             GenericResponse<Client> entity = await clientRepository.GetByIdAsync(id);
 
-            return GenericResponse<ClientResponseDto>.Ok(ClientExtension.AddressResponseDto(entity.Data), entity.Message);
+            return GenericResponse<ClientResponseDto>.Ok(ClientExtension.ClientResponseDto(entity.Data), entity.Message);
+        }
+        public async Task<GenericResponse<ClientResponseDto>> UpdateAsync(UpdateClientRequestDto request)
+        {
+            return await UpdateClientAsync(request.ClientId, p => p.UpdateClient(request.ClientId, request.FullName, request.Gender, request.BirthDate, request.AddressId, request.UserId), "Cliente atualizada com sucesso.");
         }
     }
 }

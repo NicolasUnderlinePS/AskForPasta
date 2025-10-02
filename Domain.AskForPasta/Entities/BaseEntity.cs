@@ -16,5 +16,10 @@
         public int Id { get; private set; }
         public DateTime CreateAt { get; private set; }
         public DateTime UpdateAt { get; private set; }
+
+        public void SetUpdateAt(DateTime updateAt)
+        {
+            UpdateAt = updateAt;
+        }
     }
 }

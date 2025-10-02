@@ -15,7 +15,7 @@ namespace Infrastructure.AskForPasta.Repositories
             _context = context;
         }
 
-        public async Task<GenericResponse<int>> CreateAsync(User entity)
+        public async Task<GenericResponse<int>> InsertAsync(User entity)
         {
             await _context.User.AddAsync(entity);
             await _context.SaveChangesAsync();
@@ -33,14 +33,21 @@ namespace Infrastructure.AskForPasta.Repositories
             return GenericResponse<User>.Ok(entity, "Usuário encontrado com sucesso.");
         }
 
-        public async Task<GenericResponse<bool>> GetUserToLoginAsync(string email, string password)
+        public async Task<GenericResponse<User>> GetUserByEmailAsync(string email)
         {
-            User? entity = await _context.User.Where(u => u.Email == email && u.EncryptPassword == password && u.IsActive).FirstOrDefaultAsync();
+            User? entity = await _context.User.Where(u => u.Email == email).FirstOrDefaultAsync();
 
             if (entity == null)
-                return GenericResponse<bool>.Fail("Usuário ou senha inválidos, ou usuário inativo.");
+                return GenericResponse<User>.Fail("Usuário não foi encontrado.");
 
-            return GenericResponse<bool>.Ok(true, "Login realizado com sucesso.");
+            return GenericResponse<User>.Ok(entity, "Usuário encontrado com sucesso.");
+        }
+
+        public async Task<GenericResponse<User>> UpdateAsync(User entity)
+        {
+            await _context.SaveChangesAsync();
+            
+            return GenericResponse<User>.Ok(entity, "Usuário atualizado com sucesso.");
         }
     }
 }

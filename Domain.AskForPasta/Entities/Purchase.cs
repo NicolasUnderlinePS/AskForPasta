@@ -2,7 +2,7 @@
 {
     public class Purchase : BaseEntity
     {
-        public Purchase(int id, DateTime purchaseDate, int clientId, int addressId, int purchaseStatusId, DateTime createAt) : base(id, createAt)
+        public Purchase(DateTime purchaseDate, int clientId, int addressId, int purchaseStatusId, DateTime createAt) : base(createAt)
         {
             PurchaseDate = purchaseDate;
             ClientId = clientId;

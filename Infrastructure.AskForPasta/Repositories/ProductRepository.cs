@@ -15,7 +15,7 @@ namespace Infrastructure.AskForPasta.Repositories
             _context = context;
         }
 
-        public async Task<GenericResponse<int>> CreateAsync(Product entity)
+        public async Task<GenericResponse<int>> InsertAsync(Product entity)
         {
             await _context.Product.AddAsync(entity);
             await _context.SaveChangesAsync();
@@ -33,14 +33,39 @@ namespace Infrastructure.AskForPasta.Repositories
             return GenericResponse<Product>.Ok(entity, "Produto encontrado com sucesso.");
         }
 
-        public Task<GenericResponse<int>> IncreaseFromStock(int productId, int quantity)
+        public async Task<GenericResponse<int>> IncreaseFromStock(int productId, int quantity)
         {
-            throw new NotImplementedException();
+            Product? product = await _context.Product.FindAsync(productId);
+
+            if (product == null)
+                return GenericResponse<int>.Fail("Produto não encontrado.");
+
+            product.IncreaseStock(quantity);
+
+            await _context.SaveChangesAsync();
+
+            return GenericResponse<int>.Ok(product.StockQuantity, "Estoque aumentado com sucesso.");
         }
 
-        public Task<GenericResponse<int>> SubtractFromStock(int productId, int quantity)
+        public async Task<GenericResponse<int>> SubtractFromStock(int productId, int quantity)
         {
-            throw new NotImplementedException();
+            Product? product = await _context.Product.FindAsync(productId);
+
+            if (product == null)
+                return GenericResponse<int>.Fail("Produto não encontrado.");
+
+            product.DecreaseStock(quantity);
+
+            await _context.SaveChangesAsync();
+
+            return GenericResponse<int>.Ok(product.StockQuantity, "Estoque reduzido com sucesso.");
+        }
+
+        public async Task<GenericResponse<Product>> UpdateAsync(Product entity)
+        {
+            await _context.SaveChangesAsync();
+
+            return GenericResponse<Product>.Ok(entity, "Produto atualizado com sucesso.");
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class Payment : BaseEntity
     {
-        public Payment(int id, int purchaseId, DateTime paymentDate, int paymentMethodTypeId, decimal amount, DateTime createAt) : base(id, createAt)
+        public Payment(int purchaseId, DateTime paymentDate, int paymentMethodTypeId, decimal amount, DateTime createAt) : base(createAt)
         {
             PurchaseId = purchaseId;
             PaymentDate = paymentDate;

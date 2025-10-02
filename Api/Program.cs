@@ -1,4 +1,3 @@
-
 using Api.Extensions;
 using Application.AskForPasta.Configurations;
 using Infrastructure.AskForPasta.Configurations;
@@ -37,7 +36,6 @@ namespace Api
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

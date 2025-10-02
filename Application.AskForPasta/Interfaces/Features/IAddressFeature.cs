@@ -7,6 +7,6 @@ namespace Application.AskForPasta.Interfaces.Features
 {
     public interface IAddressFeature : IBaseFeature<CreateAddressRequestDto, AddressResponseDto>
     {
-
+        Task<GenericResponse<AddressResponseDto>> UpdateAsync(UpdateAddressRequestDto request);
     }
 }

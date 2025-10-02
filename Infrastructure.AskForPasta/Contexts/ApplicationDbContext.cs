@@ -25,6 +25,7 @@ namespace Infrastructure.AskForPasta.Contexts
             modelBuilder.Entity<Address>(entity =>
             {
                 entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.ZipCode).IsRequired().HasMaxLength(8);
                 entity.Property(e => e.Street).IsRequired().HasMaxLength(100);
                 entity.Property(e => e.Neighborhood).IsRequired().HasMaxLength(100);
@@ -39,6 +40,7 @@ namespace Infrastructure.AskForPasta.Contexts
             modelBuilder.Entity<Client>(entity =>
             {
                 entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.FullName).IsRequired().HasMaxLength(100);
                 entity.Property(e => e.Gender).IsRequired();
                 entity.Property(e => e.BirthDate).IsRequired();
@@ -54,6 +56,7 @@ namespace Infrastructure.AskForPasta.Contexts
             modelBuilder.Entity<Payment>(entity =>
             {
                 entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.Amount).IsRequired().HasPrecision(10, 2);
                 entity.Property(e => e.PaymentDate).IsRequired();
                 entity.Property(e => e.PaymentMethodTypeId).IsRequired();
@@ -68,6 +71,7 @@ namespace Infrastructure.AskForPasta.Contexts
             modelBuilder.Entity<PaymentMethodType>(entity =>
             {
                 entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.Code).IsRequired().HasMaxLength(36);
                 entity.Property(e => e.TypeDescription).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.CreateAt).IsRequired();
@@ -77,6 +81,7 @@ namespace Infrastructure.AskForPasta.Contexts
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.Code).IsRequired().HasMaxLength(36);
                 entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
                 entity.Property(e => e.ImagePath).IsRequired().HasMaxLength(8000);
@@ -89,6 +94,7 @@ namespace Infrastructure.AskForPasta.Contexts
             modelBuilder.Entity<ProductCategory>(entity =>
             {
                 entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.Code).IsRequired().HasMaxLength(36);
                 entity.Property(e => e.CategoryDescription).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.CreateAt).IsRequired();
@@ -98,6 +104,7 @@ namespace Infrastructure.AskForPasta.Contexts
             modelBuilder.Entity<ProductCategoryProduct>(entity =>
             {
                 entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.ProductId).IsRequired();
                 entity.Property(e => e.ProductCategoryId).IsRequired();
                 entity.Property(e => e.CreateAt).IsRequired();
@@ -110,6 +117,7 @@ namespace Infrastructure.AskForPasta.Contexts
             modelBuilder.Entity<Purchase>(entity =>
             {
                 entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.PurchaseDate).IsRequired();
                 entity.Property(e => e.ClientId).IsRequired();
                 entity.Property(e => e.AddressId).IsRequired();
@@ -125,6 +133,7 @@ namespace Infrastructure.AskForPasta.Contexts
             modelBuilder.Entity<PurchaseLog>(entity =>
             {
                 entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.PurchaseId).IsRequired();
                 entity.Property(e => e.OldStatusId).IsRequired();
                 entity.Property(e => e.NewStatusId).IsRequired();
@@ -140,6 +149,7 @@ namespace Infrastructure.AskForPasta.Contexts
             modelBuilder.Entity<PurchaseProduct>(entity =>
             {
                 entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.PurchaseId).IsRequired();
                 entity.Property(e => e.ProductId).IsRequired();
                 entity.Property(e => e.Quantity).IsRequired();
@@ -155,6 +165,7 @@ namespace Infrastructure.AskForPasta.Contexts
             modelBuilder.Entity<PurchaseStatus>(entity =>
             {
                 entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.Code).IsRequired().HasMaxLength(36);
                 entity.Property(e => e.StatusDescription).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.CreateAt).IsRequired();
@@ -164,12 +175,13 @@ namespace Infrastructure.AskForPasta.Contexts
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.NickName).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.Document).IsRequired().HasMaxLength(14);
                 entity.Property(e => e.Email).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.CellPhone).IsRequired().HasMaxLength(13);
                 entity.Property(e => e.IsActive).IsRequired();
-                entity.Property(e => e.EncryptPassword).IsRequired().HasMaxLength(64);
+                entity.Property(e => e.EncryptPassword).IsRequired().HasMaxLength(60);
                 entity.Property(e => e.UserTypeId).IsRequired();
                 entity.Property(e => e.CreateAt).IsRequired();
                 entity.Property(e => e.UpdateAt);
@@ -180,6 +192,7 @@ namespace Infrastructure.AskForPasta.Contexts
             modelBuilder.Entity<UserType>(entity =>
             {
                 entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.Code).IsRequired().HasMaxLength(36);
                 entity.Property(e => e.TypeDescription).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.CreateAt).IsRequired();

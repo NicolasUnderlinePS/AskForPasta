@@ -15,7 +15,7 @@ namespace Infrastructure.AskForPasta.Repositories
             _context = context;
         }
 
-        public async Task<GenericResponse<int>> CreateAsync(Client entity)
+        public async Task<GenericResponse<int>> InsertAsync(Client entity)
         {
             await _context.Client.AddAsync(entity);
             await _context.SaveChangesAsync();
@@ -31,6 +31,13 @@ namespace Infrastructure.AskForPasta.Repositories
                 return GenericResponse<Client>.Fail("Cliente não foi encontrado.");
 
             return GenericResponse<Client>.Ok(entity, "Cliente encontrado com sucesso.");
+        }
+
+        public async Task<GenericResponse<Client>> UpdateAsync(Client entity)
+        {
+            await _context.SaveChangesAsync();
+
+            return GenericResponse<Client>.Ok(entity, "Cliente atualizado com sucesso.");
         }
     }
 }

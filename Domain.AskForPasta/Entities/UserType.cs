@@ -2,7 +2,7 @@
 {
     public class UserType : BaseEntity
     {
-        public UserType(int id, string code, string typeDescription, DateTime createAt) : base(id, createAt)
+        public UserType(string code, string typeDescription, DateTime createAt) : base(createAt)
         {
             Code = code;
             TypeDescription = typeDescription;

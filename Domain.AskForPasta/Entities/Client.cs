@@ -16,5 +16,10 @@
         public DateTime BirthDate { get; private set; }
         public int AddressId { get; private set; }
         public int UserId { get; private set; }
+
+        public void UpdateClient(int clientId, string fullName, int gender, DateTime birthDate, int addressId, int userId)
+        {
+            SetUpdateAt(UpdateAt);
+        }
     }
 }

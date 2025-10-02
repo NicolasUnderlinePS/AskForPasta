@@ -23,5 +23,45 @@
         public string ImagePath { get; private set; }
         public decimal Price { get; private set; }
         public int StockQuantity { get; private set; }
+
+        public void IncreaseStock(int quantity)
+        {
+            if (quantity <= 0)
+                throw new ArgumentException("A quantidade deve ser maior que zero.");
+
+            StockQuantity += quantity;
+        }
+
+        public void DecreaseStock(int quantity)
+        {
+            if (quantity <= 0)
+                throw new ArgumentException("A quantidade deve ser maior que zero.");
+
+            if (quantity > StockQuantity)
+                throw new InvalidOperationException("Não é permitido reduzir o estoque abaixo de zero.");
+            else
+                StockQuantity -= quantity;
+        }
+
+        public void UpdateImagePath(string imagePath)
+        {
+            ImagePath = imagePath;
+        }
+
+        public void UpdatePrice(decimal price)
+        {
+            if (price < 0)
+                throw new ArgumentException("O preço não pode ser negativo.");
+
+            Price = price;
+        }
+
+        public void UpdateName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("O nome não pode ser vazio.");
+
+            Name = name;
+        }
     }
 }
