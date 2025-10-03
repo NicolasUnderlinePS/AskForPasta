@@ -206,11 +206,11 @@ namespace Infrastructure.AskForPasta.Contexts
             );
 
             modelBuilder.Entity<ProductCategory>().HasData(
-                new PaymentMethodType(1, Guid.NewGuid().ToString(), "Massa", DateTime.Now),
-                new PaymentMethodType(2, Guid.NewGuid().ToString(), "Recheada", DateTime.Now),
-                new PaymentMethodType(3, Guid.NewGuid().ToString(), "Vegetariana", DateTime.Now),
-                new PaymentMethodType(4, Guid.NewGuid().ToString(), "Italiana", DateTime.Now),
-                new PaymentMethodType(5, Guid.NewGuid().ToString(), "Oriental", DateTime.Now)
+                new ProductCategory(1, Guid.NewGuid().ToString(), "Massa", DateTime.Now),
+                new ProductCategory(2, Guid.NewGuid().ToString(), "Recheada", DateTime.Now),
+                new ProductCategory(3, Guid.NewGuid().ToString(), "Vegetariana", DateTime.Now),
+                new ProductCategory(4, Guid.NewGuid().ToString(), "Italiana", DateTime.Now),
+                new ProductCategory(5, Guid.NewGuid().ToString(), "Oriental", DateTime.Now)
             );
 
             modelBuilder.Entity<PurchaseStatus>().HasData(

@@ -2,7 +2,7 @@
 {
     public class PaymentMethodType : BaseEntity
     {
-        public PaymentMethodType(string code, string typeDescription, DateTime createAt) : base (createAt)
+        public PaymentMethodType(int id, string code, string typeDescription, DateTime createAt) : base (id, createAt)
         {
             Code = code;
             TypeDescription = typeDescription;

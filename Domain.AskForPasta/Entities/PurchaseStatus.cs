@@ -2,7 +2,7 @@
 {
     public class PurchaseStatus : BaseEntity
     {
-        public PurchaseStatus(string code, string statusDescription, DateTime createAt) : base(createAt)
+        public PurchaseStatus(int id, string code, string statusDescription, DateTime createAt) : base(id, createAt)
         {
             Code = code;
             StatusDescription = statusDescription;
