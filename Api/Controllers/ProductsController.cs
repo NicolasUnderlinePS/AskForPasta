@@ -30,5 +30,17 @@ namespace Api.Controllers
 
             return Ok(response.Data);
         }
+
+        // GET /api/products/{id} → buscar produto
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProductById(int id)
+        {
+            GenericResponse<ProductResponseDto> response = await productFeature.GetByIdAsync(id);
+
+            if (response.Success == false || response.Data == null)
+                return NotFound(response.Data);
+
+            return Ok(response.Data);
+        }
     }
 }

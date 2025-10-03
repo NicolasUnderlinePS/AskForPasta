@@ -199,6 +199,11 @@ namespace Infrastructure.AskForPasta.Contexts
                 entity.Property(e => e.UpdateAt);
             });
 
+            modelBuilder.Entity<Product>().HasData(
+                new Product(1, "Lasanha", Guid.NewGuid().ToString(), "", 12.89M, 98, DateTime.Now),
+                new Product(2, "Rondeli", Guid.NewGuid().ToString(), "", 10.99M, 70,  DateTime.Now)
+            );
+
             modelBuilder.Entity<PaymentMethodType>().HasData(
                 new PaymentMethodType(1, Guid.NewGuid().ToString(), "Pix", DateTime.Now),
                 new PaymentMethodType(2, Guid.NewGuid().ToString(), "Cartão", DateTime.Now),

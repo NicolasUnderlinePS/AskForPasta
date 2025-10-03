@@ -33,34 +33,6 @@ namespace Infrastructure.AskForPasta.Repositories
             return GenericResponse<Product>.Ok(entity, "Produto encontrado com sucesso.");
         }
 
-        public async Task<GenericResponse<int>> IncreaseFromStock(int productId, int quantity)
-        {
-            Product? product = await _context.Product.FindAsync(productId);
-
-            if (product == null)
-                return GenericResponse<int>.Fail("Produto não encontrado.");
-
-            product.IncreaseStock(quantity);
-
-            await _context.SaveChangesAsync();
-
-            return GenericResponse<int>.Ok(product.StockQuantity, "Estoque aumentado com sucesso.");
-        }
-
-        public async Task<GenericResponse<int>> SubtractFromStock(int productId, int quantity)
-        {
-            Product? product = await _context.Product.FindAsync(productId);
-
-            if (product == null)
-                return GenericResponse<int>.Fail("Produto não encontrado.");
-
-            product.DecreaseStock(quantity);
-
-            await _context.SaveChangesAsync();
-
-            return GenericResponse<int>.Ok(product.StockQuantity, "Estoque reduzido com sucesso.");
-        }
-
         public async Task<GenericResponse<Product>> UpdateAsync(Product entity)
         {
             await _context.SaveChangesAsync();

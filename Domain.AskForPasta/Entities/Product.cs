@@ -11,6 +11,15 @@
             StockQuantity = stockQuantity;
         }
 
+        public Product(int id, string name, string code, string imagePath, decimal price, int stockQuantity, DateTime createAt) : base(id, createAt)
+        {
+            Name = name;
+            Code = code;
+            ImagePath = imagePath;
+            Price = price;
+            StockQuantity = stockQuantity;
+        }
+
         public Product(int id) : base(id, DateTime.Now)
         {
             Name = string.Empty;
