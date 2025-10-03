@@ -35,7 +35,7 @@ namespace Application.AskForPasta.Features
 
         public async Task<GenericResponse<ProductResponseDto>> InsertAsync(CreateProductRequestDto request)
         {
-            Product entity = new Product(request.Name, request.Code, string.Empty, request.Price, request.StockQuantity, request.RequestTime);
+            Product entity = new Product(request.Name, Guid.NewGuid().ToString(), string.Empty, request.Price, request.StockQuantity, request.RequestTime);
 
             GenericResponse<int> response = await productRepository.InsertAsync(entity);
 

@@ -37,7 +37,7 @@ namespace Application.AskForPasta.Features
 
         public async Task<GenericResponse<UserResponseDto>> InsertAsync(CreateUserRequestDto request)
         {
-            User user = new User(request.NickName, request.Document, request.Email, request.CellPhone, false, request.Password, request.UserTypeId, request.RequestTime);
+            User user = new User(0, request.NickName, request.Document, request.Email, request.CellPhone, false, request.Password, request.UserTypeId, request.RequestTime);
 
             GenericResponse<int> response = await userRepository.InsertAsync(user);
 

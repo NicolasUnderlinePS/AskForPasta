@@ -1,4 +1,5 @@
 ﻿using Domain.AskForPasta.Entities;
+using System.Text.Json.Serialization;
 
 namespace Application.AskForPasta.DTOs.Requests
 {
@@ -12,6 +13,7 @@ namespace Application.AskForPasta.DTOs.Requests
 
 
         public User User { get; set; }
+        [JsonIgnore]
         public DateTime RequestTime { get; set; }
     }
 }

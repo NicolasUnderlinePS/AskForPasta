@@ -153,7 +153,7 @@ namespace Infrastructure.AskForPasta.Contexts
                 entity.Property(e => e.PurchaseId).IsRequired();
                 entity.Property(e => e.ProductId).IsRequired();
                 entity.Property(e => e.Quantity).IsRequired();
-                entity.Property(e => e.UnitPrice).IsRequired();
+                entity.Property(e => e.UnitPrice).IsRequired().HasPrecision(10, 2);
                 entity.Property(e => e.TotalPrice).IsRequired().HasPrecision(10, 2);
                 entity.Property(e => e.CreateAt).IsRequired();
                 entity.Property(e => e.UpdateAt);

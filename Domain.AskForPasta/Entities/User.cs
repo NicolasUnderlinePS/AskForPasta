@@ -2,7 +2,7 @@
 {
     public class User : BaseEntity
     {
-        public User(string nickName, string document, string email, string cellPhone, bool isActive, string encryptPassword, int userTypeId, DateTime createAt) : base(createAt)
+        public User(int id, string nickName, string document, string email, string cellPhone, bool isActive, string encryptPassword, int userTypeId, DateTime createAt) : base(id, createAt)
         {
             NickName = nickName;
             Document = document;
